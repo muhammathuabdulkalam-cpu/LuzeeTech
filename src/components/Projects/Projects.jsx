@@ -256,20 +256,6 @@ const BentoCard = ({ project }) => {
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
     
-    // 3D Tilt calculation (max 8 degrees to feel premium and subtle)
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const rotateX = ((y - centerY) / centerY) * -8;
-    const rotateY = ((x - centerX) / centerX) * 8;
-    
-    gsap.to(cardRef.current, {
-      rotateX,
-      rotateY,
-      transformPerspective: 1200,
-      ease: 'power2.out',
-      duration: 0.4
-    });
-
     // Update dynamic spotlight position
     if (glowRef.current) {
       glowRef.current.style.background = `radial-gradient(800px circle at ${x}px ${y}px, ${project.glowColor}, transparent 60%)`;
@@ -277,14 +263,6 @@ const BentoCard = ({ project }) => {
   };
 
   const handleMouseLeave = () => {
-    if (!cardRef.current) return;
-    gsap.to(cardRef.current, {
-      rotateX: 0,
-      rotateY: 0,
-      ease: 'power3.out',
-      duration: 0.6
-    });
-
     // Reset spotlight to center-top
     if (glowRef.current) {
       glowRef.current.style.background = `radial-gradient(800px circle at 50% 0%, ${project.glowColor}, transparent 60%)`;
@@ -296,7 +274,6 @@ const BentoCard = ({ project }) => {
     ref={cardRef}
     onMouseMove={handleMouseMove}
     onMouseLeave={handleMouseLeave}
-    style={{ transformStyle: 'preserve-3d', willChange: 'transform' }}
     className={`bento-card group relative rounded-3xl bg-[#0d0e18] border border-white/[0.07] hover:border-white/15 transition-colors duration-500 flex flex-col ${project.colSpan || ''}`}
   >
     {/* Inner wrapper with hidden overflow for the banners, but allowing 3D pop */}
@@ -315,24 +292,24 @@ const BentoCard = ({ project }) => {
       style={{ background: `linear-gradient(90deg, transparent, ${project.glowColor.replace('0.25', '0.8').replace('0.2', '0.8')}, transparent)` }}
     />
     
-    {/* Banner Section (Pops out in 3D) */}
-    <div className="w-full border-b border-white/[0.05] relative z-10 rounded-t-3xl overflow-hidden" style={{ transform: 'translateZ(10px)' }}>
+    {/* Banner Section */}
+    <div className="w-full border-b border-white/[0.05] relative z-10 rounded-t-3xl overflow-hidden">
       {project.banner}
     </div>
 
-    {/* Content Section (Pops out in 3D) */}
-    <div className="p-6 sm:p-8 flex-1 flex flex-col relative z-20 bg-[#0d0e18] rounded-b-3xl" style={{ transform: 'translateZ(20px)' }}>
+    {/* Content Section */}
+    <div className="p-6 sm:p-8 flex-1 flex flex-col relative z-20 bg-[#0d0e18] rounded-b-3xl">
       <div className="flex justify-between items-start mb-4">
-        <h3 className="text-xl sm:text-2xl font-display font-bold text-white transition-colors" style={{ transform: 'translateZ(30px)' }}>
+        <h3 className="text-xl sm:text-2xl font-display font-bold text-white transition-colors">
           {project.title}
         </h3>
       </div>
       
-      <p className="text-gray-400 text-sm leading-relaxed mb-6 flex-1" style={{ transform: 'translateZ(10px)' }}>
+      <p className="text-gray-400 text-sm leading-relaxed mb-6 flex-1">
         {project.description}
       </p>
       
-      <div className="flex flex-wrap gap-2 mb-8" style={{ transform: 'translateZ(15px)' }}>
+      <div className="flex flex-wrap gap-2 mb-8">
         {project.tags.map((tag, i) => (
           <span key={i} className="text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-white/5 text-gray-300 border border-white/10 shadow-lg">
             {tag}
@@ -340,7 +317,7 @@ const BentoCard = ({ project }) => {
         ))}
       </div>
 
-      <div className="flex gap-3 mt-auto" style={{ transform: 'translateZ(25px)' }}>
+      <div className="flex gap-3 mt-auto">
         {project.links.map((link, i) => (
           <a 
             key={i} 
