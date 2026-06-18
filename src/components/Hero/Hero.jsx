@@ -139,8 +139,8 @@ const Hero = () => {
                 <img
                   src={profileImg}
                   alt="Profile"
-                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
-                  style={{ objectPosition: 'center 25%', filter: 'contrast(1.1) brightness(1.1) saturate(1.1)' }}
+                  className="w-full h-full object-cover scale-125 transition-transform duration-700 hover:scale-[1.4]"
+                  style={{ objectPosition: 'center 15%', filter: 'contrast(1.1) brightness(1.1) saturate(1.1)' }}
                 />
                 <div className="absolute inset-0 bg-primary/10 mix-blend-overlay pointer-events-none"></div>
               </div>
