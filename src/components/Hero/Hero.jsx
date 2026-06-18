@@ -94,7 +94,7 @@ const Hero = () => {
             className="hidden lg:flex items-center gap-8 border-t border-white/10 pt-8 mt-auto"
           >
             <div>
-              <p className="text-4xl font-display font-bold text-white">20+</p>
+              <p className="text-4xl font-display font-bold text-white">3+</p>
               <p className="text-xs text-gray-500 uppercase tracking-widest mt-1 font-semibold">Projects Done</p>
             </div>
             <div className="w-px h-12 bg-white/10"></div>

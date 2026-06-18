@@ -9,12 +9,16 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setStatus('sending');
-    // Simulate sending
+    
+    const text = `Hello LuzeeTech!\nName: ${formData.name}\nEmail: ${formData.email}\nProject Details: ${formData.message}`;
+    const whatsappUrl = `https://wa.me/919894924809?text=${encodeURIComponent(text)}`;
+    
     setTimeout(() => {
       setStatus('success');
+      window.open(whatsappUrl, '_blank');
       setFormData({ name: '', email: '', message: '' });
       setTimeout(() => setStatus('idle'), 3000);
-    }, 1500);
+    }, 800);
   };
 
   return (

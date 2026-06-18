@@ -234,8 +234,8 @@ const projectsData = [
     glowColor: "rgba(236,72,153,0.2)" // Pink glow
   },
   {
-    title: "Gym Landing Page",
-    description: "High-performance marketing website designed to showcase the Gym Tracker app, featuring cinematic video backgrounds and smooth scrolling.",
+    title: "Tranzio Landing Page",
+    description: "High-performance marketing website designed to showcase the Tranzio fitness ecosystem, featuring cinematic video backgrounds and smooth scrolling.",
     tags: ["React", "Vite", "GSAP", "Tailwind"],
     links: [
       { name: "View Live Site", icon: <FiExternalLink />, url: "https://gym-tracker-website-six.vercel.app/" }
@@ -246,7 +246,7 @@ const projectsData = [
   }
 ];
 
-const BentoCard = ({ project }) => {
+const BentoCard = ({ project, index }) => {
   const cardRef = useRef(null);
   const glowRef = useRef(null);
 
@@ -274,7 +274,7 @@ const BentoCard = ({ project }) => {
     ref={cardRef}
     onMouseMove={handleMouseMove}
     onMouseLeave={handleMouseLeave}
-    className={`bento-card group relative rounded-3xl bg-[#0d0e18] border border-white/[0.07] hover:border-white/15 transition-colors duration-500 flex flex-col ${project.colSpan || ''}`}
+    className={`bento-card-${index} group relative rounded-3xl bg-[#0d0e18] border border-white/[0.07] hover:border-white/15 transition-colors duration-500 flex flex-col ${project.colSpan || ''}`}
   >
     {/* Inner wrapper with hidden overflow for the banners, but allowing 3D pop */}
     <div className="absolute inset-0 rounded-3xl overflow-hidden pointer-events-none z-0">
@@ -342,22 +342,40 @@ const Projects = () => {
     gsap.registerPlugin(ScrollTrigger);
 
     let ctx = gsap.context(() => {
-      // Staggered 3D card entrance linked to scroll
-      gsap.fromTo('.bento-card',
-        { y: 150, z: -200, rotationX: 45, opacity: 0 },
-        {
-          y: 0, z: 0, rotationX: 0, opacity: 1,
-          duration: 1.2,
-          stagger: 0.15,
-          ease: 'power3.out',
-          transformPerspective: 1000,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 80%',
-            toggleActions: 'play none none none',
-          },
-        }
-      );
+      let mm = gsap.matchMedia();
+
+      mm.add("(min-width: 768px)", () => {
+        // Desktop animations
+        gsap.fromTo('.bento-card-0',
+          { x: -150, opacity: 0 },
+          { x: 0, opacity: 1, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: '.bento-card-0', start: 'top 80%', toggleActions: 'play none none none' } }
+        );
+        gsap.fromTo('.bento-card-1',
+          { x: 150, opacity: 0 },
+          { x: 0, opacity: 1, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: '.bento-card-1', start: 'top 80%', toggleActions: 'play none none none' } }
+        );
+        gsap.fromTo('.bento-card-2',
+          { y: 150, opacity: 0 },
+          { y: 0, opacity: 1, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: '.bento-card-2', start: 'top 80%', toggleActions: 'play none none none' } }
+        );
+      });
+
+      mm.add("(max-width: 767px)", () => {
+        // Mobile animations (stacked)
+        gsap.fromTo('.bento-card-0',
+          { x: -150, opacity: 0 },
+          { x: 0, opacity: 1, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: '.bento-card-0', start: 'top 80%', toggleActions: 'play none none none' } }
+        );
+        gsap.fromTo('.bento-card-1',
+          { x: 150, opacity: 0 },
+          { x: 0, opacity: 1, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: '.bento-card-1', start: 'top 80%', toggleActions: 'play none none none' } }
+        );
+        // Third box from left on mobile
+        gsap.fromTo('.bento-card-2',
+          { x: -150, opacity: 0 },
+          { x: 0, opacity: 1, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: '.bento-card-2', start: 'top 80%', toggleActions: 'play none none none' } }
+        );
+      });
 
       // Section title reveal
       gsap.fromTo('.project-title',
@@ -368,6 +386,15 @@ const Projects = () => {
           scrollTrigger: { trigger: '.project-header', start: 'top 88%' },
         }
       );
+
+      // Typewriter effect for "Crafted by LuzeeTech"
+      gsap.from('.typing-text-container', {
+        width: 0,
+        duration: 1.5,
+        ease: "steps(20)", // Typewriter style
+        delay: 0.2, // Let it fade up first
+        scrollTrigger: { trigger: '.project-header', start: 'top 88%' }
+      });
     }, sectionRef);
 
     return () => ctx.revert();
@@ -380,14 +407,21 @@ const Projects = () => {
         {/* Header (Removed portfolio links, completely business focused) */}
         <div className="project-header flex flex-col md:flex-row md:items-end justify-between mb-8 lg:mb-16 gap-6">
           <div className="max-w-2xl">
-            <p className="project-title text-primary font-semibold tracking-wider uppercase text-sm mb-2 glow-cyan">
-              Case Studies
-            </p>
+            <div className="overflow-hidden whitespace-nowrap typing-text-container w-max mb-2">
+              <div className="flex items-center gap-1.5 border-r-2 border-transparent pr-1">
+                <span className="text-gray-400 font-semibold tracking-wider uppercase text-sm">Crafted by</span>
+                <div className="font-display font-bold tracking-tight text-white flex items-center text-[15px] mt-[-2px]">
+                  <span className="text-glow-cyan">Luzee</span>
+                  <span className="text-primary">&nbsp;Tech.</span>
+                  {/* <span className="inline-block w-[2px] h-[18px] ml-1.5 bg-primary animate-pulse"></span> */}
+                </div>
+              </div>
+            </div>
             <h2 className="project-title text-4xl md:text-5xl font-display font-bold text-white mb-4">
-              Featured Projects
+              Our Projects
             </h2>
             <p className="project-title text-gray-400 text-sm max-w-md">
-              A selection of premium, high-performance applications built for the modern web.
+              A selection of premium, high-performance applications delivered by the LuzeeTech team.
             </p>
           </div>
         </div>
@@ -395,7 +429,7 @@ const Projects = () => {
         {/* Bento Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 perspective-[1000px]">
           {projectsData.map((project, index) => (
-            <BentoCard key={index} project={project} />
+            <BentoCard key={index} project={project} index={index} />
           ))}
         </div>
 

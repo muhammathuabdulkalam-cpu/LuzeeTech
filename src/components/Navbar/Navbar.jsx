@@ -70,7 +70,7 @@ const Navbar = () => {
         transition={{ duration: 1, delay: 1.5, ease: [0.16, 1, 0.3, 1] }}
         className="fixed bottom-5 left-1/2 z-[60] w-[94%] max-w-[400px] md:hidden"
       >
-        <div className="relative bg-[#060913]/90 backdrop-blur-2xl border border-white/10 rounded-2xl px-2 py-1.5 flex items-center shadow-[0_20px_50px_rgba(0,0,0,0.8),inset_0_1px_0_rgba(255,255,255,0.05)] overflow-hidden">
+        <div className="relative bg-[#060913]/90 backdrop-blur-2xl border border-white/10 rounded-2xl px-2 py-1 flex items-center shadow-[0_20px_50px_rgba(0,0,0,0.8),inset_0_1px_0_rgba(255,255,255,0.05)] overflow-hidden">
           {navLinks.map((link, idx) => {
             const isActive = activeTab === link.name;
             return (
@@ -78,7 +78,7 @@ const Navbar = () => {
                 key={idx} 
                 href={link.href} 
                 onClick={() => setActiveTab(link.name)}
-                className="relative flex flex-col items-center justify-center w-1/4 h-[64px] transition-all duration-300 z-10"
+                className="relative flex flex-col items-center justify-center w-1/4 h-[52px] transition-all duration-300 z-10"
               >
                 {/* Animated Top Glow Line */}
                 {isActive && (
@@ -99,12 +99,12 @@ const Navbar = () => {
                 )}
 
                 {/* Icon */}
-                <div className={`relative z-10 text-[22px] transition-all duration-300 ${isActive ? 'text-primary -translate-y-1' : 'text-zinc-500 hover:text-zinc-400'}`}>
+                <div className={`relative z-10 text-[20px] transition-all duration-300 ${isActive ? 'text-primary -translate-y-[2px]' : 'text-zinc-500 hover:text-zinc-400'}`}>
                   {link.icon}
                 </div>
                 
                 {/* Always Visible Name */}
-                <span className={`text-[10px] mt-1 font-semibold tracking-wide transition-all duration-300 ${isActive ? 'text-white' : 'text-zinc-500'}`}>
+                <span className={`text-[10px] mt-0.5 font-semibold tracking-wide transition-all duration-300 ${isActive ? 'text-white' : 'text-zinc-500'}`}>
                   {link.name}
                 </span>
               </a>
