@@ -361,19 +361,18 @@ const Projects = () => {
       });
 
       mm.add("(max-width: 767px)", () => {
-        // Mobile animations (stacked)
+        // Mobile animations (smooth fade-in from bottom)
         gsap.fromTo('.bento-card-0',
-          { x: -150, opacity: 0 },
-          { x: 0, opacity: 1, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: '.bento-card-0', start: 'top 80%', toggleActions: 'play none none none' } }
+          { y: 50, opacity: 0 },
+          { y: 0, opacity: 1, duration: 1.0, ease: 'power2.out', scrollTrigger: { trigger: '.bento-card-0', start: 'top 85%', toggleActions: 'play none none none' } }
         );
         gsap.fromTo('.bento-card-1',
-          { x: 150, opacity: 0 },
-          { x: 0, opacity: 1, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: '.bento-card-1', start: 'top 80%', toggleActions: 'play none none none' } }
+          { y: 50, opacity: 0 },
+          { y: 0, opacity: 1, duration: 1.0, ease: 'power2.out', scrollTrigger: { trigger: '.bento-card-1', start: 'top 85%', toggleActions: 'play none none none' } }
         );
-        // Third box from left on mobile
         gsap.fromTo('.bento-card-2',
-          { x: -150, opacity: 0 },
-          { x: 0, opacity: 1, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: '.bento-card-2', start: 'top 80%', toggleActions: 'play none none none' } }
+          { y: 50, opacity: 0 },
+          { y: 0, opacity: 1, duration: 1.0, ease: 'power2.out', scrollTrigger: { trigger: '.bento-card-2', start: 'top 85%', toggleActions: 'play none none none' } }
         );
       });
 
