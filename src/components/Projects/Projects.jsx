@@ -227,7 +227,7 @@ const projectsData = [
     description: "Standalone mobile application offering seamless on-the-go tracking and personalized workout plans. Built for iOS and Android.",
     tags: ["React Native", "Expo", "Redux"],
     links: [
-      { name: "Download Expo Build", icon: <FiSmartphone />, url: "https://expo.dev/accounts/thouficafzals-organization/projects/gym-app/builds/8bb28f4f-9dec-493e-9802-b8ff7ac718a0" }
+      { name: "Download Expo Build", icon: <FiSmartphone />, url: "https://expo.dev/accounts/muhammathuabdulkalam/projects/GYM-APP/builds/ffadc944-1814-420d-8a3b-1ca49cca8179" }
     ],
     banner: <MobileCarousel />,
     colSpan: "md:col-span-1 lg:col-span-1",
