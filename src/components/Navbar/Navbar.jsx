@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FiHome, FiBriefcase, FiLayers, FiMail } from 'react-icons/fi';
+import { FiHome, FiUser, FiBriefcase, FiLayers, FiCalendar } from 'react-icons/fi';
 import companyLogo from '../../assets/logo.png';
 
 const Navbar = () => {
@@ -19,7 +19,8 @@ const Navbar = () => {
     { name: 'Home', href: '#home', icon: <FiHome className="text-xl" /> },
     { name: 'Services', href: '#services', icon: <FiLayers className="text-xl" /> },
     { name: 'Projects', href: '#projects', icon: <FiBriefcase className="text-xl" /> },
-    { name: 'Contact', href: '#contact', icon: <FiMail className="text-xl" /> },
+    { name: 'About', href: '#about', icon: <FiUser className="text-xl" /> },
+    { name: 'Book Call', href: '#book-call', icon: <FiCalendar className="text-xl" /> },
   ];
 
   return (
@@ -56,8 +57,8 @@ const Navbar = () => {
                 </li>
               ))}
             </ul>
-            <a href="#contact" className="px-6 py-2.5 rounded-full bg-primary/10 text-primary border border-primary/30 hover:bg-primary hover:text-dark-900 transition-all duration-300 glow-cyan btn-magnetic text-sm font-semibold">
-              Hire Us
+            <a href="#book-call" className="px-6 py-2.5 rounded-full bg-primary/10 text-primary border border-primary/30 hover:bg-primary hover:text-dark-900 transition-all duration-300 glow-cyan btn-magnetic text-sm font-semibold">
+              Book Call
             </a>
           </div>
         </div>
@@ -78,7 +79,7 @@ const Navbar = () => {
                 key={idx} 
                 href={link.href} 
                 onClick={() => setActiveTab(link.name)}
-                className="relative flex flex-col items-center justify-center w-1/4 h-[52px] transition-all duration-300 z-10"
+                className="relative flex flex-col items-center justify-center flex-1 h-[52px] transition-all duration-300 z-10"
               >
                 {/* Animated Top Glow Line */}
                 {isActive && (
