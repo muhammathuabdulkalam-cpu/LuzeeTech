@@ -71,7 +71,7 @@ const Hero = () => {
             className="flex items-center justify-center gap-8 md:gap-12 border-t border-white/10 pt-8 w-full max-w-sm"
           >
             <div>
-              <p className="text-3xl md:text-4xl font-display font-bold text-white">3+</p>
+              <p className="text-3xl md:text-4xl font-display font-bold text-white">10+</p>
               <p className="text-[10px] md:text-xs text-gray-500 uppercase tracking-widest mt-1 font-semibold">Projects Done</p>
             </div>
             <div className="w-px h-10 bg-white/10"></div>
